@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="white"/>
+  <!-- Bars -->
+  <rect x="30" y="100" width="20" height="60" fill="#4CAF50"/>
+  <rect x="60" y="80" width="20" height="80" fill="#2196F3"/>
+  <rect x="90" y="50" width="20" height="110" fill="#FFC107"/>
+  <rect x="120" y="30" width="20" height="130" fill="#F44336"/>
+  <!-- Trend arrow -->
+  <polyline points="30,100 70,70 100,40 140,20" fill="none" stroke="#000000" stroke-width="4"/>
+  <polygon points="138,12 152,20 138,28" fill="#000000"/>
+</svg>
