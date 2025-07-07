@@ -1,0 +1,25 @@
+{
+    "projects": [],
+    "primary_kpis":[
+        {
+            "id": 1,
+            "name": "Internal Rate of Return (IRR) - %/year"
+        },
+        {
+            "id": 2,
+            "name": "Net Present Value (NPV) - $"
+        },
+        {
+            "id": 3,
+            "name": "Payback Period - years"
+        },
+        {
+            "id": 4,
+            "name": "Return on Investment (ROI) - %"
+        },
+        {
+            "id": 5,
+            "name": "Levelized Cost of Product (LCP) - $/kg"
+        }
+    ]
+}

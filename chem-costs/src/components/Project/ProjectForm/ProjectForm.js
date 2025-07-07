@@ -1,9 +1,32 @@
+import { useEffect, useState } from 'react';
 import Input from '../../Form/Input/Input';
 import Select from '../../Form/Select/Select';
 import styles from './ProjectForm.module.css';
 import SubmitButton from '../../Form/SubmitButton/SubmitButton';
 
-function ProjectForm( { btnText }) {
+function ProjectForm( { btnText, handleSubmit, projectData } ) {
+    const [ kpis, setKpis ] = useState([]);
+    const [ project, setProject ] = useState(projectData || {});
+
+    // Fetch primary KPIs from the backend
+    // This effect runs once when the component mounts
+    useEffect(() => {
+        fetch('http://localhost:5000/primary_kpis', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },})
+        .then((response) => response.json())
+        .then((data) => {
+            setKpis(data);
+        }
+        )
+        .catch((error) => console.error('Error fetching KPIs:', error));
+    }, []);
+
+    // Handle form submission
+    
+
     return (
         <form className={styles.form}>
             <Input type="text" text="Project Name" name="project_name" placeholder="Insert the new project name"/>
@@ -11,7 +34,7 @@ function ProjectForm( { btnText }) {
             <Input type="number" text="Plant Capacity (ton/year)" name="plant_capacity" placeholder="Insert the Plant Capacity, in ton/year"/>
             <Input type="number" text="Yearly Discount Rate (%)" name="discount_rate" placeholder="Insert the yearly discount rate "/>
             <Input type="number" text="Project Duration (years)" name="project_duration" placeholder="Inser the project duration in years"/>
-            <Select name="primary_kpi" text="Select the primary KPI"/>
+            <Select name="primary_kpi" text="Select the primary KPI" options={kpis}/>
             <SubmitButton text={btnText} />
         </form>
     );
