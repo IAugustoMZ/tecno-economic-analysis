@@ -1,25 +1,62 @@
 {
-    "projects": [],
-    "primary_kpis":[
-        {
-            "id": 1,
-            "name": "Internal Rate of Return (IRR) - %/year"
-        },
-        {
-            "id": 2,
-            "name": "Net Present Value (NPV) - $"
-        },
-        {
-            "id": 3,
-            "name": "Payback Period - years"
-        },
-        {
-            "id": 4,
-            "name": "Return on Investment (ROI) - %"
-        },
-        {
-            "id": 5,
-            "name": "Levelized Cost of Product (LCP) - $/kg"
-        }
-    ]
+  "projects": [
+    {
+      "id": "55fb",
+      "project_name": "teste",
+      "project_description": "teste",
+      "plant_capacity": "100000000",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "a6f5",
+      "project_name": "teste",
+      "project_description": "teste",
+      "plant_capacity": "100000000",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "1322",
+      "project_name": "teste2",
+      "project_description": "teste2",
+      "plant_capacity": "11290123918918",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "4",
+        "name": "Return on Investment (ROI) - %"
+      }
+    }
+  ],
+  "primary_kpis": [
+    {
+      "id": "1",
+      "name": "Internal Rate of Return (IRR) - %/year"
+    },
+    {
+      "id": "2",
+      "name": "Net Present Value (NPV) - $"
+    },
+    {
+      "id": "3",
+      "name": "Payback Period - years"
+    },
+    {
+      "id": "4",
+      "name": "Return on Investment (ROI) - %"
+    },
+    {
+      "id": "5",
+      "name": "Levelized Cost of Product (LCP) - $/kg"
+    }
+  ]
 }

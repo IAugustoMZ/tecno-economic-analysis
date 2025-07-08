@@ -19,6 +19,9 @@ function NewProject() {
         .then((data) => {
             console.log('Success:', data);
             // redirect
+            history('/projects', {
+                message: 'Project created successfully!'
+            });
         })
         .catch((error) => {
             console.error('Error creating project:', error);
