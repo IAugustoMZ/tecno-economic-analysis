@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
+import Loading from '../../layout/Loading/Loading'
 import Message from "../../layout/Message/Message";
 import styles from './AvailableProjects.module.css';
 import Container from "../../layout/Container/Container";
@@ -14,21 +15,23 @@ function AvailableProjects() {
   }
 
   const [projects, setProjects] = useState([]);
+  const [removeLoading, setRemoveLoading] = useState(false);
 
   // Fetch projects from an API or local storage
   useEffect(() => {
-    fetch('http://localhost:5000/projects', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setProjects(data);
-    }).catch((error) => {
-        console.error('Error fetching projects:', error);
-      });
+    setTimeout(()=>{
+      fetch('http://localhost:5000/projects', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setProjects(data);
+          setRemoveLoading(true);
+      }).catch((error) => console.log(error));
+    }, 2000);
   }, []);
 
   return (
@@ -49,7 +52,10 @@ function AvailableProjects() {
             key={project.id}
           />
         ))}
-        {projects.length === 0 && <p>No projects available</p>}
+        {!removeLoading && <Loading />}
+        {removeLoading && projects.length === 0 && (
+          <Message type="warning" text="No projects found!" />
+        )}
       </Container>
     </div>
     
