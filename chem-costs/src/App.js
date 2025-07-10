@@ -3,10 +3,10 @@ import Company from './components/pages/Company'
 import Contact from './components/pages/Contact'
 import Navbar from './components/layout/Navbar/Navbar'
 import Footer from './components/layout/Footer/Footer'
-import NewProject from './components/pages/NewProject/NewProject'
 import Container from './components/layout/Container/Container'
-import AvailableProjects from './components/pages/AvailableProjects'
+import NewProject from './components/pages/NewProject/NewProject'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import AvailableProjects from './components/pages/AvailableProjects/AvailableProjects'
 
 function App() {
 
