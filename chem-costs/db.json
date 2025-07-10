@@ -83,30 +83,6 @@
         "id": "1",
         "name": "Internal Rate of Return (IRR) - %/year"
       }
-    },
-    {
-      "id": "3a24",
-      "project_name": "bla",
-      "project_description": "bla",
-      "plant_capacity": "50",
-      "discount_rate": "15",
-      "project_duration": "20",
-      "primary_kpi": {
-        "id": "1",
-        "name": "Internal Rate of Return (IRR) - %/year"
-      }
-    },
-    {
-      "id": "4677",
-      "project_name": "tes",
-      "project_description": "bla",
-      "plant_capacity": "1",
-      "discount_rate": "1",
-      "project_duration": "1",
-      "primary_kpi": {
-        "id": "1",
-        "name": "Internal Rate of Return (IRR) - %/year"
-      }
     }
   ],
   "primary_kpis": [
