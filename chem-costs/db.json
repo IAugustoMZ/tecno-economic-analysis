@@ -35,6 +35,78 @@
         "id": "4",
         "name": "Return on Investment (ROI) - %"
       }
+    },
+    {
+      "id": "f95a",
+      "project_name": "test3",
+      "project_description": "test3",
+      "plant_capacity": "10000",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "ad5c",
+      "project_name": "test",
+      "project_description": "test",
+      "plant_capacity": "10000",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "c781",
+      "project_name": "test4",
+      "project_description": "test3",
+      "plant_capacity": "10",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "17df",
+      "project_name": "test",
+      "project_description": "test2",
+      "plant_capacity": "20",
+      "discount_rate": "10",
+      "project_duration": "10",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "3a24",
+      "project_name": "bla",
+      "project_description": "bla",
+      "plant_capacity": "50",
+      "discount_rate": "15",
+      "project_duration": "20",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
+    },
+    {
+      "id": "4677",
+      "project_name": "tes",
+      "project_description": "bla",
+      "plant_capacity": "1",
+      "discount_rate": "1",
+      "project_duration": "1",
+      "primary_kpi": {
+        "id": "1",
+        "name": "Internal Rate of Return (IRR) - %/year"
+      }
     }
   ],
   "primary_kpis": [

@@ -35,7 +35,6 @@ function ProjectForm( { btnText, handleSubmit, projectData } ) {
         setProject({
             ...project, [e.target.name]: e.target.value
         });
-        console.log(project);
     }
 
     // handle kpi selection
