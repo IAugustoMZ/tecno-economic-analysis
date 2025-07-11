@@ -16,6 +16,7 @@ function AvailableProjects() {
 
   const [projects, setProjects] = useState([]);
   const [removeLoading, setRemoveLoading] = useState(false);
+  const [projectMessage, setProjectMessage] = useState('');
 
   // Fetch projects from an API or local storage
   useEffect(() => {
@@ -34,6 +35,20 @@ function AvailableProjects() {
     }, 2000);
   }, []);
 
+  // remove projects from the list
+  function removeProject(id) {
+    fetch(`http://localhost:5000/projects/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.json())
+      .then(() => {
+        setProjects(projects.filter((project) => project.id !== id));
+        setProjectMessage('Project removed successfully!');
+      }).catch((error) => console.log(error));
+  }
+
   return (
     <div className={styles.project_container}>
       <div className={styles.title_container}>
@@ -41,6 +56,7 @@ function AvailableProjects() {
         <LinkButton to="/newproject" text="Create New Project" />
       </div>
       { message && <Message type="success" text={message} /> }
+      { projectMessage && <Message type="success" text={projectMessage} /> }
       <Container customClass="start">
         {projects.length > 0 && projects.map((project) => (
           <ProjectCard
@@ -50,6 +66,7 @@ function AvailableProjects() {
             primaryKPI={project.primary_kpi.name}
             id={project.id}
             key={project.id}
+            handleRemove={removeProject}
           />
         ))}
         {!removeLoading && <Loading />}

@@ -22,6 +22,14 @@ function ProjectCard({ id, projectName, projectDescription, plantCapacity, prima
         return primaryKPI;
     }
 
+    // Function to handle project deletion
+    const deleteProject = (e) => {
+        e.preventDefault();
+        if (window.confirm('Are you sure you want to delete this project?')) {
+            handleRemove(id);
+        }
+    }
+
     return (
        <div className={styles.project_card}>
             <h4>{projectName}</h4>
@@ -35,7 +43,7 @@ function ProjectCard({ id, projectName, projectDescription, plantCapacity, prima
             <div className={styles.project_card_actions}>
                 <Link to='/'><BsClipboardDataFill/> Details</Link>
                 <Link to='/'><BsPencil/> Edit</Link>
-                <button><BsFillTrashFill/> Delete</button>
+                <button onClick={deleteProject}><BsFillTrashFill/> Delete</button>
             </div>
        </div>
     );
