@@ -42,7 +42,7 @@ function ProjectCard({ id, projectName, projectDescription, plantCapacity, prima
             </p>
             <div className={styles.project_card_actions}>
                 <Link to='/'><BsClipboardDataFill/> Details</Link>
-                <Link to='/'><BsPencil/> Edit</Link>
+                <Link to={`/project/${id}`}><BsPencil/> Edit</Link>
                 <button onClick={deleteProject}><BsFillTrashFill/> Delete</button>
             </div>
        </div>
