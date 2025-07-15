@@ -1,0 +1,22 @@
+# Use official Node.js LTS image
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /chem_costs
+VOLUME /chem_costs
+
+# Copy project files into the container
+COPY chem-costs .
+
+# Install dependencies
+RUN npm install
+
+# Build the frontend (if using a build step, e.g., React/Vue/Angular)
+# Uncomment the next line if you have a build script
+# RUN npm run build
+
+# Expose port (change if your app uses a different port)
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
