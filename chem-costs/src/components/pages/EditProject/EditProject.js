@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './EditProject.module.css';
 import Loading from '../../layout/Loading/Loading';
+import Message from '../../layout/Message/Message';
 import Container from '../../layout/Container/Container';
+import ProjectForm from '../../Project/ProjectForm/ProjectForm';
 
 function EditProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [message, setMessage] = useState('');
+    const [type, setType] = useState('');
 
     // Fetch project data based on the ID from the URL
     useEffect(() => {
@@ -29,18 +33,41 @@ function EditProject() {
         }, 1000);
     }, [id]);
 
+    // Function to handle project edit submission
+    function handleEdit( project ) {
+        fetch(`http://localhost:5000/projects/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(project)
+        }).then(
+            resp => resp.json()
+        ).then(
+            (data) => {
+                setProject(data);
+                setShowForm(!showForm);
+                setMessage('Project updated successfully!');
+                setType('success');
+            }
+        ).catch((error) => console.log('Error updating project:', error));
+        setMessage('');
+        setType('');
+    }
+
     // Function to toggle the project form visibility
     function toggleProjectForm() {
         setShowForm(!showForm);
     }
-
 
     return (
         <>
             {
                 project.project_name ? (
                     <div className={styles.project_details}>
-                        <Container  customClass="column">
+                        <Container customClass="column">
+                            {console.log('Message value:', message)}
+                            {message && <Message type={type} text={message} />}
                             <div className={styles.details_container}>
                                 <h1>Project: {project.project_name}</h1>
                                 <button className={styles.btn} onClick={toggleProjectForm}>
@@ -63,23 +90,24 @@ function EditProject() {
                                                 <span>Project Duration (years):</span> {project.project_duration}
                                             </p>
                                             <p>
-                                                <span>Primary KPI:</span> {project.primary_kpi.name}
+                                                <span>Primary KPI:</span> {project.primary_kpi?.name}
                                             </p>
                                         </div>
                                     ) : (
                                         <div className={styles.project_info}>
                                             <h2>Edit Project Details</h2>
-                                            {/* Here you would include the form component to edit the project */}
-                                            {/* Example: <ProjectForm project={project} /> */}
-                                            <p>Form to edit project details goes here.</p>
+                                            <ProjectForm
+                                                handleSubmit={handleEdit}
+                                                btnText="Finish Edition"
+                                                projectData={project}
+                                            />
                                         </div>
                                     )
                                 }
                             </div>
                         </Container>
                     </div>
-                ):
-                (
+                ) : (
                     <Loading />
                 )
             }

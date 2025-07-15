@@ -50,11 +50,12 @@ function ProjectForm( { btnText, handleSubmit, projectData } ) {
 
     return (
         <form className={styles.form} onSubmit={submit}>
-            <Input type="text" text="Project Name" name="project_name" placeholder="Insert the new project name" onChange={handleChange}/>
-            <Input type="text" text="Project Description" name="project_description" placeholder="Insert the Project Description" onChange={handleChange}/>
-            <Input type="number" text="Plant Capacity (ton/year)" name="plant_capacity" placeholder="Insert the Plant Capacity, in ton/year" onChange={handleChange}/>
-            <Input type="number" text="Yearly Discount Rate (%)" name="discount_rate" placeholder="Insert the yearly discount rate " onChange={handleChange}/>
-            <Input type="number" text="Project Duration (years)" name="project_duration" placeholder="Inser the project duration in years" onChange={handleChange}/>
+            {console.log(project)}
+            <Input type="text" text="Project Name" name="project_name" placeholder="Insert the new project name" onChange={handleChange} value={project.project_name}/>
+            <Input type="text" text="Project Description" name="project_description" placeholder="Insert the Project Description" onChange={handleChange} value={project.project_description}/>
+            <Input type="number" text="Plant Capacity (ton/year)" name="plant_capacity" placeholder="Insert the Plant Capacity, in ton/year" onChange={handleChange} value={project.plant_capacity}/>
+            <Input type="number" text="Yearly Discount Rate (%)" name="discount_rate" placeholder="Insert the yearly discount rate " onChange={handleChange} value={project.discount_rate}/>
+            <Input type="number" text="Project Duration (years)" name="project_duration" placeholder="Inser the project duration in years" onChange={handleChange} value={project.project_duration}/>
             <Select name="primary_kpi" text="Select the primary KPI" options={kpis} onChange={handleKpiChange} value={project.primary_kpi?.id }/>
             <SubmitButton text={btnText} />
         </form>

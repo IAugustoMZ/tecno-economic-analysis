@@ -2,11 +2,11 @@
   "projects": [
     {
       "id": "55fb",
-      "project_name": "teste",
-      "project_description": "teste",
-      "plant_capacity": "100000000",
-      "discount_rate": "10",
-      "project_duration": "10",
+      "project_name": "teste edit 3",
+      "project_description": "teste edit 2",
+      "plant_capacity": "1000000",
+      "discount_rate": "12",
+      "project_duration": "11",
       "primary_kpi": {
         "id": "1",
         "name": "Internal Rate of Return (IRR) - %/year"
