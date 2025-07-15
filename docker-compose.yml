@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  techno_economic_app_frontend:
+    container_name: techno_economic_app_frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.front
+    ports:
+      - "3000:3000"
+    volumes:
+      - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\chem-costs:/chem_costs
