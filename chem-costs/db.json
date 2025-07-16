@@ -10,6 +10,51 @@
       "primary_kpi": {
         "id": "1",
         "name": "Internal Rate of Return (IRR) - %/year"
+      },
+      "general_info": {
+        "total_equipment_cost": "134",
+        "total_utility_cost": "23",
+        "product_selling_price": "2"
+      },
+      "capex": {
+        "direct_costs": {
+          "working_capital_cost": "20",
+          "insulation_and_painting_cost": 30,
+          "instrumentation_and_control_cost": 20,
+          "piping_cost": 35,
+          "electrical_system_cost": 20,
+          "construction_process_auxiliaries_cost": 30,
+          "installation_services_improvements_cost": 50,
+          "land_cost": "0"
+        },
+        "indirect_costs": {
+          "engineering_supervision_cost": 15,
+          "construction_expenditures_contractors_fees": 15,
+          "contingency": 10
+        }
+      },
+      "product_cost": {
+        "production_costs": {
+          "raw_material_cost": 40,
+          "operational_labor_cost": 10,
+          "direct_supervision_office_work_cost": 2,
+          "utilities_waste_treatment_cost": 10,
+          "maintenance_repairs_cost": 2,
+          "operation_supplies_cost": 0.5,
+          "laboratory_charges_cost": 0.5,
+          "patents_royalties_cost": 0.5,
+          "depreciation_buildings": 2,
+          "local_taxes": 1,
+          "insurance": 0.4,
+          "rent": 0,
+          "general_plant_expenses": 5
+        },
+        "general_expenditures": {
+          "administrative_costs": 3,
+          "distribution_selling_costs": 5,
+          "research_development_costs": 5,
+          "financing": 0
+        }
       }
     },
     {
@@ -65,18 +110,6 @@
       "project_name": "test4",
       "project_description": "test3",
       "plant_capacity": "10",
-      "discount_rate": "10",
-      "project_duration": "10",
-      "primary_kpi": {
-        "id": "1",
-        "name": "Internal Rate of Return (IRR) - %/year"
-      }
-    },
-    {
-      "id": "17df",
-      "project_name": "test",
-      "project_description": "test2",
-      "plant_capacity": "20",
       "discount_rate": "10",
       "project_duration": "10",
       "primary_kpi": {

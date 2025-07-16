@@ -5,12 +5,17 @@ import Loading from '../../layout/Loading/Loading';
 import Message from '../../layout/Message/Message';
 import Container from '../../layout/Container/Container';
 import ProjectForm from '../../Project/ProjectForm/ProjectForm';
+import GeneralInfoCard from '../../Service/GeneralInfoCard/GeneralInfoCard';
+import EconomicInfoForm from '../../Service/EconomicInfoForm/EconomicInfoForm';
+import EconomicSummaryCard from '../../Service/EconomicSummaryCard/EconomicSummaryCard';
 
 function EditProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
-    const [showForm, setShowForm] = useState(false);
+    const [generalInfo, setGeneralInfo] = useState({});
+    const [showProjectForm, setShowProjectForm] = useState(false);
+    const [showServiceForm, setShowServiceForm] = useState(false);
     const [message, setMessage] = useState('');
     const [type, setType] = useState('');
 
@@ -27,7 +32,7 @@ function EditProject() {
             ).then(
                 (data) => {
                     setProject(data);
-                    console.log(data);
+                    setGeneralInfo(data.general_info || {});
                 }
             ).catch((error) => console.log('Error fetching project:', error))
         }, 1000);
@@ -46,7 +51,7 @@ function EditProject() {
         ).then(
             (data) => {
                 setProject(data);
-                setShowForm(!showForm);
+                setShowProjectForm(!showProjectForm);
                 setMessage('Project updated successfully!');
                 setType('success');
             }
@@ -55,10 +60,50 @@ function EditProject() {
         setType('');
     }
 
+    // Function to create economic information
+    function createEconomicInfo(economicInfo) {
+        // update the project with economic information
+        const updatedProject = { ...project };
+        
+        // reset the message and type
+        setMessage('');
+        setType('');
+
+        fetch(`http://localhost:5000/projects/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(economicInfo)
+        }).then(
+            resp => resp.json()
+        ).then(
+            (data) => {
+                setProject(updatedProject);
+                setShowServiceForm(!showServiceForm);
+                setMessage('Economic information added successfully!');
+                setType('success');
+            }
+        ).catch((error) => console.log('Error creating economic info:', error));
+    }
+    
+
     // Function to toggle the project form visibility
     function toggleProjectForm() {
-        setShowForm(!showForm);
+        setShowProjectForm(!showProjectForm);
     }
+
+    // Function to toggle the project form visibility
+    function toggleServiceForm() {
+        setShowServiceForm(!showServiceForm);
+    }
+
+    // Check if project has general_info, capex, and product_cost
+    const hasEconomicInfo =
+        project.general_info &&
+        Object.keys(project.general_info).length > 0 &&
+        project.capex !== undefined &&
+        project.product_cost !== undefined;
 
     return (
         <>
@@ -71,10 +116,10 @@ function EditProject() {
                             <div className={styles.details_container}>
                                 <h1>Project: {project.project_name}</h1>
                                 <button className={styles.btn} onClick={toggleProjectForm}>
-                                    {showForm ? 'Hide' : 'Edit Project'}
+                                    {showProjectForm ? 'Hide' : 'Edit Project'}
                                 </button>
                                 {
-                                    !showForm ? (
+                                    !showProjectForm ? (
                                         <div className={styles.project_info}>
                                             <h2>Project Information</h2>
                                             <p>
@@ -105,6 +150,38 @@ function EditProject() {
                                     )
                                 }
                             </div>
+                            <div className={styles.services_form_container}>
+                                <h2>
+                                    {hasEconomicInfo
+                                        ? 'Update Project Economic Information'
+                                        : 'Add Project Economic Information'}
+                                </h2>
+                                <button className={styles.btn} onClick={toggleServiceForm}>
+                                    {showServiceForm
+                                        ? 'Hide'
+                                        : hasEconomicInfo
+                                            ? 'Update Economic Information'
+                                            : 'Add Economic Information'}
+                                </button>
+                                <div className={styles.project_info}>
+                                    {
+                                        showServiceForm && <EconomicInfoForm 
+                                            handleSubmit={createEconomicInfo}
+                                            txtBtn={hasEconomicInfo ? "Update Economic Info" : "Save Economic Info"}
+                                            projectData={project}
+                                        />
+                                    }
+                                </div>
+                            </div>
+                            <h2>Economic Information</h2>
+                            <Container customClass="start">
+                                {!project.general_info || Object.keys(project.general_info).length === 0 ? (
+                                    <p>No economic information available.</p>
+                                ) : <>
+                                    <GeneralInfoCard projectData={project} />
+                                    <EconomicSummaryCard projectData={project} />;
+                                </>}
+                            </Container>
                         </Container>
                     </div>
                 ) : (

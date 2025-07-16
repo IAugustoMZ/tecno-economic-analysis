@@ -7,6 +7,12 @@ function NewProject() {
     const history = useNavigate();
 
     function createProject(project) {
+        // initialize the project characteristics
+        project.general_info = {};
+        project.capex = {};
+        project.product_cost = {};
+        project.cash_flow_info = {};
+
         // Send a POST request to the backend to create a new project
         fetch('http://localhost:5000/projects', {
             method: 'POST',
