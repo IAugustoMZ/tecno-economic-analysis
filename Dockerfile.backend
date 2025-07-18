@@ -1,0 +1,22 @@
+FROM python:3.11
+
+# image maintainer
+LABEL maintainer="Icaro Zelioli"
+
+# update the mirrors list and install the dependencies
+RUN apt-get update
+
+# create the api folder and use it for volume mounting
+RUN mkdir /api
+VOLUME /api
+WORKDIR /api
+
+# copy the requirements file into the container
+# and install the dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8000
+
+# define the command to run the application
+CMD ['tail', "-f", "/dev/null"]
