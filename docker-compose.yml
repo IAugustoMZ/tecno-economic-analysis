@@ -1,12 +1,25 @@
 version: '3.8'
 
 services:
-  techno_economic_app_frontend:
-    container_name: techno_economic_app_frontend
+  # techno_economic_app_frontend:
+  #   container_name: techno_economic_app_frontend
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.front
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\chem-costs:/chem_costs
+  #   depends_on:
+  #     - techno_economic_app_backend
+  techno_economic_app_backend:
+    container_name: techno_economic_app_backend
     build:
       context: .
-      dockerfile: Dockerfile.front
+      dockerfile: Dockerfile.backend
     ports:
-      - "3000:3000"
+      - "8000:8000"
     volumes:
-      - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\chem-costs:/chem_costs
+      - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\backend:/api
+    command: ["tail", "-f", "/dev/null"]
+    
