@@ -6,30 +6,32 @@ function NewProject() {
 
     const history = useNavigate();
 
-    function createProject(project) {
-        // initialize the project characteristics
-        project.general_info = {};
-        project.capex = {};
-        project.product_cost = {};
-        project.cash_flow_info = {};
+    async function createProject(project) {
 
-        // Send a POST request to the backend to create a new project
-        fetch('http://localhost:5000/projects', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(project),
-        })
-        .then((response) => response.json())
-        .then((data) => {
+        // Convert numeric fields to float
+        project.project_duration = parseFloat(project.project_duration);
+        project.discount_rate = parseFloat(project.discount_rate);
+        project.plant_capacity = parseFloat(project.plant_capacity);
+        
+        // Convert primary KPI ID to integer
+        project.primary_kpi_id = parseInt(project.primary_kpi.id, 10);
+        delete project.primary_kpi;
+
+        try {
+            const response = await fetch('http://localhost:8000/new-project', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(project),
+            });
+            const data = await response.json();
             console.log('Success:', data);
             // redirect
             history('/availableprojects', { state: {message: 'Project created successfully!'}});
-        })
-        .catch((error) => {
+        } catch (error) {
             console.error('Error creating project:', error);
-        });
+        }
     }
 
     return (

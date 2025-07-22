@@ -13,7 +13,6 @@ function EditProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
-    const [generalInfo, setGeneralInfo] = useState({});
     const [showProjectForm, setShowProjectForm] = useState(false);
     const [showServiceForm, setShowServiceForm] = useState(false);
     const [message, setMessage] = useState('');
@@ -21,43 +20,53 @@ function EditProject() {
 
     // Fetch project data based on the ID from the URL
     useEffect(() => {
-        setTimeout(() => {
-            fetch(`http://localhost:5000/projects/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(
-                resp => resp.json()
-            ).then(
-                (data) => {
-                    setProject(data);
-                    setGeneralInfo(data.general_info || {});
-                }
-            ).catch((error) => console.log('Error fetching project:', error))
-        }, 1000);
+        async function getProject() {
+            try {
+                const resp = await fetch(`http://localhost:8000/get-project/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await resp.json();
+                setProject(data);
+            } catch (error) {
+                console.log('Error fetching project:', error);
+            }
+        }
+        getProject();
     }, [id]);
 
     // Function to handle project edit submission
-    function handleEdit( project ) {
-        fetch(`http://localhost:5000/projects/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(project)
-        }).then(
-            resp => resp.json()
-        ).then(
-            (data) => {
-                setProject(data);
-                setShowProjectForm(!showProjectForm);
-                setMessage('Project updated successfully!');
-                setType('success');
-            }
-        ).catch((error) => console.log('Error updating project:', error));
+    async function handleEdit(project) {
         setMessage('');
         setType('');
+
+        // Convert numeric fields to float
+        project.project_duration = parseFloat(project.project_duration);
+        project.discount_rate = parseFloat(project.discount_rate);
+        project.plant_capacity = parseFloat(project.plant_capacity);
+        
+        // Convert primary KPI ID to integer
+        project.primary_kpi_id = parseInt(project.primary_kpi.id, 10);
+        delete project.primary_kpi;
+
+        try {
+            const resp = await fetch(`http://localhost:8000/update-project/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(project)
+            });
+            const data = await resp.json();
+            setProject(data.project);
+            setShowProjectForm(!showProjectForm);
+            setMessage('Project updated successfully!');
+            setType('success');
+        } catch (error) {
+            console.log('Error updating project:', error);
+        }
     }
 
     // Function to create economic information
