@@ -11,19 +11,22 @@ function ProjectForm( { btnText, handleSubmit, projectData } ) {
     // Fetch primary KPIs from the backend
     // This effect runs once when the component mounts
     useEffect(() => {
-        fetch('http://localhost:8000/primary-kpis', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            setKpis(data.primary_kpis);
-            console.log('Fetched KPIs:', data.primary_kpis);
-
-        })
-        .catch((error) => console.error('Error fetching KPIs:', error));
+        async function fetchKpis() {
+            try {
+                const response = await fetch('http://localhost:8000/get-primary-kpis', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const data = await response.json();
+                setKpis(data.primary_kpis);
+                console.log('Fetched KPIs:', data.primary_kpis);
+            } catch (error) {
+                console.error('Error fetching KPIs:', error);
+            }
+        }
+        fetchKpis();
     }, []);
 
     // Handle form submission

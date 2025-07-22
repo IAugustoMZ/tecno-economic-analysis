@@ -3,8 +3,10 @@ import yaml
 import logging
 from config import AppSettings
 from sqlalchemy import create_engine
+from models.database.base import Base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from models.database.project import Project
+from models.database.primary_kpis import PrimaryKPI
 
 
 # instantiate logging
@@ -28,7 +30,7 @@ class DatabaseConnectionHandler:
         self.config = AppSettings()
         self.engine = None
         self.session = None
-        self.base = declarative_base()
+        self.base = Base
 
         # load the database schema
         self._load_schema()

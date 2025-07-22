@@ -1,10 +1,8 @@
+from models.database.base import Base
 from sqlalchemy import Column, Integer, String
-from auth.database import DatabaseConnectionHandler
 
-# instance of database connection handler
-db_handler = DatabaseConnectionHandler()
 
-class PrimaryKPI(db_handler.base):
+class PrimaryKPI(Base):
     """
     PrimaryKPI model represents the primary key performance indicators in the database.
     It extends the base class from SQLAlchemy's declarative base.

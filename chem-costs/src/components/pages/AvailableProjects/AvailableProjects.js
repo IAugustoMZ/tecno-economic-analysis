@@ -20,33 +20,40 @@ function AvailableProjects() {
 
   // Fetch projects from an API or local storage
   useEffect(() => {
-    setTimeout(()=>{
-      fetch('http://localhost:5000/projects', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setProjects(data);
-          setRemoveLoading(true);
-      }).catch((error) => console.log(error));
-    }, 2000);
+    async function fetchProjects() {
+      try {
+        const response = await fetch('http://localhost:8000/get-available-projects', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        setProjects(data);
+        setRemoveLoading(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchProjects();
   }, []);
 
   // remove projects from the list
-  function removeProject(id) {
-    fetch(`http://localhost:5000/projects/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => response.json())
-      .then(() => {
-        setProjects(projects.filter((project) => project.id !== id));
-        setProjectMessage('Project removed successfully!');
-      }).catch((error) => console.log(error));
+  async function removeProject(id) {
+    try {
+      const response = await fetch(`http://localhost:8000/delete-project/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      await response.json();
+      setProjects(projects.filter((project) => project.id !== id));
+      setProjectMessage('Project removed successfully!');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
