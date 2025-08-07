@@ -61,6 +61,9 @@ function ProjectForm( { btnText, handleSubmit, projectData } ) {
             <Input type="number" text="Plant Capacity (ton/year)" name="plant_capacity" placeholder="Insert the Plant Capacity, in ton/year" onChange={handleChange} value={project.plant_capacity}/>
             <Input type="number" text="Yearly Discount Rate (%)" name="discount_rate" placeholder="Insert the yearly discount rate " onChange={handleChange} value={project.discount_rate}/>
             <Input type="number" text="Project Duration (years)" name="project_duration" placeholder="Insert the project duration in years" onChange={handleChange} value={project.project_duration}/>
+            <Input type="number" text="Total Equipment Cost (million USD)" name="total_equipment_cost" placeholder="Insert the total equipment cost in million USD" onChange={handleChange} value={project.total_equipment_cost}/>
+            <Input type="number" text="Total Utility Cost (million USD / year)" name="total_utility_cost" placeholder="Insert the total utility cost in million USD per year" onChange={handleChange} value={project.total_utility_cost}/>
+            <Input type="number" text="Product Selling Price (USD / kg)" name="product_selling_price" placeholder="Insert the product selling price in USD / kg" onChange={handleChange} value={project.product_selling_price}/>
             <Select name="primary_kpi" text="Select the primary KPI" options={kpis} onChange={handleKpiChange} value={project.primary_kpi?.id }/>
             <SubmitButton text={btnText} />
         </form>

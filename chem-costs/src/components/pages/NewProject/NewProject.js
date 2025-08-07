@@ -17,16 +17,22 @@ function NewProject() {
         project.primary_kpi_id = parseInt(project.primary_kpi.id, 10);
         delete project.primary_kpi;
 
+        console.log('Creating project:', project);
+
         try {
             const response = await fetch('http://localhost:8000/new-project', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(project),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(project),
             });
             const data = await response.json();
             console.log('Success:', data);
+
+            // Recover the id of the created project if returned by the backend
+            const createdProjectId = data.id;
+            console.log('Created Project ID:', createdProjectId);
             // redirect
             history('/availableprojects', { state: {message: 'Project created successfully!'}});
         } catch (error) {

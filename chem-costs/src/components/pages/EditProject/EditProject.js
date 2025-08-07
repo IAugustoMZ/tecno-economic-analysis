@@ -110,9 +110,7 @@ function EditProject() {
     // Check if project has general_info, capex, and product_cost
     const hasEconomicInfo =
         project.general_info &&
-        Object.keys(project.general_info).length > 0 &&
-        project.capex !== undefined &&
-        project.product_cost !== undefined;
+        Object.keys(project.general_info).length > 0 
 
     return (
         <>

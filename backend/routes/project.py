@@ -57,10 +57,11 @@ async def create_project(
         project = Project(**project_data)
         
         # add project to the database
-        db.add_project(project)
+        project_id = db.add_project(project)
 
         # ensure project is JSON serializable
         project_dict = {k: v for k, v in project.__dict__.items() if not k.startswith('_')}
+        project_dict["id"] = project_id  # add the generated ID to the response
         return JSONResponse(content={
             "message": "Project created successfully",
             "project": project_dict
