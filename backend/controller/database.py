@@ -192,19 +192,27 @@ class DatabaseHandler(DatabaseConnectionHandler):
 
     def add_project(self, project: Project):
         """
-        Adds a new project to the database.
+        Adds a new project to the database and returns its ID.
 
         Parameters:
         -----------
         project : Project
             The project instance to be added.
+
+        Returns:
+        --------
+        int
+            The ID of the newly created project.
         """
         session = self.get_session()
         try:
             logger.info(f"Adding project: {project.project_name}")
             session.add(project)
+            session.flush()  # Ensure project.id is populated after insert
+            project_id = project.id
             session.commit()
-            logger.info(f"Project {project.project_name} added successfully.")
+            logger.info(f"Project {project.project_name} added successfully with ID {project_id}.")
+            return project_id
         except Exception as e:
             logger.error(f"Error adding project: {e}")
             session.rollback()
