@@ -9,6 +9,9 @@ class NewProjectSchema(BaseModel):
     discount_rate: Optional[float] = None
     project_duration: Optional[int] = None
     primary_kpi_id: int
+    total_equipment_cost: float
+    total_utility_cost: float
+    product_selling_price: float
 
     class Config:
         from_attributes = True
@@ -21,6 +24,9 @@ class AvailableProjectSchema(BaseModel):
     discount_rate: Optional[float] = None
     project_duration: Optional[int] = None
     primary_kpi: Dict[str, Any] = {}
+    total_equipment_cost: float
+    total_utility_cost: float
+    product_selling_price: float
 
     class Config:
         from_attributes = True

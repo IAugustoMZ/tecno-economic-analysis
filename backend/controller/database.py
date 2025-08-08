@@ -190,7 +190,7 @@ class DatabaseHandler(DatabaseConnectionHandler):
         finally:
             session.close()
 
-    def add_project(self, project: Project):
+    def add_project(self, project: Project) -> None:
         """
         Adds a new project to the database and returns its ID.
 
@@ -198,21 +198,13 @@ class DatabaseHandler(DatabaseConnectionHandler):
         -----------
         project : Project
             The project instance to be added.
-
-        Returns:
-        --------
-        int
-            The ID of the newly created project.
         """
         session = self.get_session()
         try:
             logger.info(f"Adding project: {project.project_name}")
             session.add(project)
-            session.flush()  # Ensure project.id is populated after insert
-            project_id = project.id
             session.commit()
-            logger.info(f"Project {project.project_name} added successfully with ID {project_id}.")
-            return project_id
+            logger.info(f"Project {project.project_name} added successfully.")
         except Exception as e:
             logger.error(f"Error adding project: {e}")
             session.rollback()
@@ -277,7 +269,10 @@ class DatabaseHandler(DatabaseConnectionHandler):
                     "plant_capacity": project.plant_capacity,
                     "discount_rate": project.discount_rate,
                     "project_duration": project.project_duration,
-                    "primary_kpi_id": project.primary_kpi_id
+                    "primary_kpi_id": project.primary_kpi_id,
+                    "total_equipment_cost": project.total_equipment_cost,
+                    "total_utility_cost": project.total_utility_cost,
+                    "product_selling_price": project.product_selling_price
                 }
             else:
                 logger.warning(f"Project with ID {project_id} not found.")

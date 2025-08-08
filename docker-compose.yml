@@ -20,6 +20,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\backend:/api
+      - C:\Users\icaro.zelioli.dev\Documents\Projects\tecno-economic-analysis\backend:/api
+      # - E:\LocalPortfolio\PersonalProjects\tecno-economic-analysis\backend:/api
     command: ["tail", "-f", "/dev/null"]
     
