@@ -14,6 +14,9 @@ class Project(Base):
     plant_capacity = Column(Float, nullable=True)
     discount_rate = Column(Float, nullable=True)
     project_duration = Column(Integer, nullable=True)
+    total_equipment_cost = Column(Float, nullable=False)
+    total_utility_cost = Column(Float, nullable=False)
+    product_selling_price = Column(Float, nullable=False)
     primary_kpi_id = Column(Integer, ForeignKey('primary_kpis.id'), nullable=False)
 
     def __repr__(self):
